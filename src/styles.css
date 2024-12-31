@@ -6,6 +6,10 @@
   font-size: 12px;
 }
 
+body {
+  background-color: white !important;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between px-8 align-center h-[90px]">
+  <div class="flex justify-between px-10 align-center h-[90px]">
     <RouterLink to="/map" class="flex items-center">
       <div class="flex flex-col gap-2 items-center justify-center">
         <IconMap :class="route.path === '/map' ? 'text-highlight' : 'text-neutral-500'" />

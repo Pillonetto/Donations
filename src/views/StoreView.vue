@@ -10,13 +10,10 @@
         <IconCart />
       </div>
     </header>
-    <div class="flex flex-col gap-8 overflow-y-scroll py-6">
+    <div class="flex flex-col gap-8 overflow-y-scroll overflow-x-hidden py-6">
       <div class="flex flex-col gap-4">
         <h1 class="font-bold text-4xl px-8">Suas metas</h1>
-        <img
-          class="w-screen h-100"
-          src="https://media.istockphoto.com/id/1345135633/pt/foto/porto-alegre-city.jpg?s=612x612&w=0&k=20&c=kGkDRHj3oXRysbGLe2CwBFCfND0xEzG_cTowKTYLm3c="
-        />
+        <GoalsCarousel />
       </div>
       <div class="flex flex-col gap-4">
         <div class="flex justify-between items-center px-8">
@@ -24,13 +21,7 @@
           <a class="text-highlight font-semibold">Ver mais</a>
         </div>
         <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar">
-          <StoreItem
-            v-for="item in MOCK_ITEMS"
-            :key="item.name"
-            :name="item.name"
-            :price="item.price"
-            :image="item.image"
-          />
+          <StoreItem v-for="item in MOCK_ITEMS" :key="item.name" :item="item" />
         </div>
       </div>
       <div class="flex flex-col gap-4">
@@ -39,13 +30,7 @@
           <a class="text-highlight font-semibold">Ver mais</a>
         </div>
         <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar">
-          <StoreItem
-            v-for="item in MOCK_ITEMS"
-            :key="item.name"
-            :name="item.name"
-            :price="item.price"
-            :image="item.image"
-          />
+          <StoreItem v-for="item in MOCK_ITEMS" :key="item.name" :item="item" />
         </div>
       </div>
     </div>
@@ -56,10 +41,15 @@ import IconCart from '@/components/icons/IconCart.vue'
 import IconInfo from '@/components/icons/IconInfo.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import PageLayout from '@/components/PageLayout.vue'
-import { type StoreThumbInfo } from '@/components/store/StoreThumbInfo.ts'
+import GoalsCarousel from '@/components/store/GoalsCarousel.vue'
+import { type ItemInfo } from '@/components/store/ItemInfo'
 import StoreItem from '@/components/store/StoreItem.vue'
+import { provideGoals } from '@/stores/GoalsStore'
 
-const MOCK_ITEMS: StoreThumbInfo[] = [
+const goalsStore = provideGoals()
+goalsStore.loadGoals()
+
+const MOCK_ITEMS: ItemInfo[] = [
   {
     name: 'Vale Compras - Renner R$10',
     price: 400,
