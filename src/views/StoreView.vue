@@ -1,6 +1,6 @@
 <template>
   <PageLayout>
-    <header class="flex justify-between items-center px-8 py-4 sticky top-0 bg-white">
+    <header class="flex justify-between items-center px-8 py-4 sticky top-0 bg-white z-10">
       <IconSearch />
       <div class="flex items-center gap-4">
         <div class="flex items-center px-2 py-1 gap-2 rounded-2xl bg-highlight text-white">
@@ -20,7 +20,7 @@
           <h2 class="text-2xl font-bold">Disponíveis para resgate</h2>
           <a class="text-highlight font-semibold">Ver mais</a>
         </div>
-        <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar">
+        <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar px-4">
           <StoreItem v-for="item in MOCK_ITEMS" :key="item.name" :item="item" />
         </div>
       </div>
@@ -29,7 +29,7 @@
           <h2 class="text-2xl font-bold">Outras recompensas</h2>
           <a class="text-highlight font-semibold">Ver mais</a>
         </div>
-        <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar">
+        <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar px-4">
           <StoreItem v-for="item in MOCK_ITEMS" :key="item.name" :item="item" />
         </div>
       </div>

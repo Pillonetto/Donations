@@ -37,7 +37,7 @@ watch(() => goals.value.length, reloadCurrent)
       <CarouselCircles
         :count="goals.length"
         :selected="current"
-        class="absolute bottom-2 w-full z-20"
+        class="absolute bottom-2 w-full z-[2]"
       />
       <CarouselContent>
         <CarouselItem v-for="goal in goals" :key="goal.name" class="relative">

@@ -8,7 +8,11 @@
     </RouterLink>
     <RouterLink to="/store" class="flex items-center">
       <div class="flex flex-col gap-2 items-center justify-center">
-        <IconStore :class="route.path === '/store' ? 'text-highlight' : 'text-neutral-500'" />
+        <IconStore
+          :class="
+            route.path === '/store' || route.path === '/' ? 'text-highlight' : 'text-neutral-500'
+          "
+        />
         <p>Recompensas</p>
       </div>
     </RouterLink>
