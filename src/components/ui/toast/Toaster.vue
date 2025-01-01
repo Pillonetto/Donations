@@ -10,7 +10,7 @@ const { toasts } = useToast()
   <ToastProvider>
     <Toast v-for="toast in toasts" :key="toast.id" v-bind="toast">
       <div class="grid gap-1">
-        <ToastTitle v-if="toast.title" class="font-bold text-lg text-highlight">
+        <ToastTitle v-if="toast.title" class="font-bold text-lg">
           {{ toast.title }}
         </ToastTitle>
         <template v-if="toast.description">

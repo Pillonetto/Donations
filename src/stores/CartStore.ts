@@ -7,9 +7,11 @@ export type CartItemInfo = {
 }
 
 const KEY = 'cart'
+const INITIAL_POINTS = 500
 
 function createCartStore() {
   const cart = ref<CartItemInfo[]>([])
+  const currentPoints = ref(INITIAL_POINTS)
 
   async function addItem(item: ItemInfo) {
     const index = cart.value.findIndex((it) => it.item.name === item.name)
@@ -35,10 +37,23 @@ function createCartStore() {
     }
   }
 
+  function checkoutCart() {
+    const totalPoints = cart.value.reduce((acc, item) => acc + item.item.price * item.quantity, 0)
+    if (totalPoints > currentPoints.value) {
+      return false
+    }
+    cart.value = []
+    currentPoints.value -= totalPoints
+    currentPoints.value = Math.max(0, currentPoints.value)
+    return true
+  }
+
   return {
     cart,
+    currentPoints,
     addItem,
     removeItem,
+    checkoutCart,
   }
 }
 

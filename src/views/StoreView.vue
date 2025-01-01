@@ -3,10 +3,26 @@
     <header class="flex justify-between items-center px-8 py-4 sticky top-0 bg-white z-10">
       <IconSearch />
       <div class="flex items-center gap-4">
-        <div class="flex items-center px-2 py-1 gap-2 rounded-2xl bg-highlight text-white">
-          <p class="font-semibold">500 Pts</p>
-          <IconInfo />
-        </div>
+        <Popover>
+          <PopoverTrigger as-child>
+            <div class="flex items-center px-2 py-1 gap-2 rounded-2xl bg-highlight text-white">
+              <p class="font-semibold">{{ currentPoints }} Pts</p>
+              <IconInfo />
+            </div>
+          </PopoverTrigger>
+          <PopoverContent class="w-80">
+            <div class="flex flex-col gap-2 items-center">
+              <h1 class="font-semibold">(Dev) Atualizar Saldo</h1>
+              <input
+                type="number"
+                placeholder="Novo Saldo (Pts)"
+                class="w-full rounded-lg px-4 py-1 text-black"
+                min="0"
+                v-model="currentPoints"
+              />
+            </div>
+          </PopoverContent>
+        </Popover>
         <CartShortcut />
       </div>
     </header>
@@ -46,8 +62,11 @@ import { type ItemInfo } from '@/components/store/ItemInfo'
 import StoreItem from '@/components/store/StoreItem.vue'
 import { provideCart } from '@/stores/CartStore'
 import { provideGoals } from '@/stores/GoalsStore'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
-runProvider()
+const goalsStore = provideGoals()
+goalsStore.loadGoals()
+const { currentPoints } = provideCart()
 
 const MOCK_ITEMS: ItemInfo[] = [
   {
@@ -71,10 +90,4 @@ const MOCK_ITEMS: ItemInfo[] = [
     price: 400,
   },
 ]
-
-function runProvider() {
-  const goalsStore = provideGoals()
-  goalsStore.loadGoals()
-  provideCart()
-}
 </script>

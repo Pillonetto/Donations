@@ -5,12 +5,14 @@ import { computed, ref } from 'vue'
 import { useCart } from '@/stores/CartStore'
 import CartItem from './CartItem.vue'
 import CheckoutConfirmation from './CheckoutConfirmation.vue'
+import { useToast } from '../ui/toast'
 
 const emit = defineEmits<{
   (e: 'close'): void
 }>()
 
-const { cart } = useCart()
+const { toast } = useToast()
+const { cart, checkoutCart } = useCart()
 const showConfirmation = ref(false)
 
 const totalPts = computed(() => {
@@ -24,9 +26,20 @@ function checkout() {
 function onConfirmationResult(result: boolean) {
   showConfirmation.value = false
   if (result) {
-    cart.value = []
-    //updatePts()
-    emit('close')
+    const success = checkoutCart()
+    if (success) {
+      toast({
+        title: 'Sucesso!',
+        description: 'Verifique seu e-mail para utilizar os itens resgatados.',
+      })
+      emit('close')
+    } else {
+      toast({
+        title: 'Erro',
+        description: 'Pontos Insuficientes! Revise os itens desejados.',
+        variant: 'destructive',
+      })
+    }
   }
 }
 </script>
