@@ -16,7 +16,7 @@ const { cart, checkoutCart } = useCart()
 const showConfirmation = ref(false)
 
 const totalPts = computed(() => {
-  return cart.value.reduce((acc, item) => acc + item.item.price * item.quantity, 0)
+  return cart.value.reduce((acc, item) => acc + item.price * item.quantity, 0)
 })
 
 function checkout() {
@@ -48,7 +48,7 @@ function onConfirmationResult(result: boolean) {
   <Drawer shouldScaleBackground @close="emit('close')">
     <DrawerContent>
       <div class="flex flex-col gap-4 divide-y divide-neutral-400/25" v-if="cart.length">
-        <CartItem v-for="cartItem in cart" :cartItemInfo="cartItem" :key="cartItem.item.name" />
+        <CartItem v-for="cartItem in cart" :cartItemInfo="cartItem" :key="cartItem.name" />
       </div>
       <p v-else class="text-neutral-600 text-2xl font-medium text-center p-8">
         Você ainda não adicionou nenhum item ao carrinho.

@@ -1,7 +1,7 @@
 <template>
   <PageLayout>
     <header class="flex justify-center items-center w-full py-4">
-      <h1 class="text-2xl font-bold">Settings</h1>
+      <h1 class="text-2xl font-bold">Ajustes</h1>
     </header>
     <div class="flex flex-col items-center px-4 gap-8 pt-12">
       <div class="flex flex-col gap-2 items-center">
@@ -17,7 +17,7 @@
         <LinkItem title="Notificações" />
         <LinkItem title="Contato" />
         <LinkItem title="Termos de Uso" />
-        <LinkItem title="Sair" />
+        <LinkItem title="Sair" to="/map" />
       </div>
     </div>
   </PageLayout>

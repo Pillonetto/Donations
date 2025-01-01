@@ -64,8 +64,7 @@ import { provideCart } from '@/stores/CartStore'
 import { provideGoals } from '@/stores/GoalsStore'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 
-const goalsStore = provideGoals()
-goalsStore.loadGoals()
+provideGoals()
 const { currentPoints } = provideCart()
 
 const MOCK_ITEMS: ItemInfo[] = [

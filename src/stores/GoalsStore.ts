@@ -31,6 +31,7 @@ function createGoalsStore() {
 
 export function provideGoals() {
   const goalsStore = createGoalsStore()
+  goalsStore.loadGoals()
   provide(KEY, goalsStore)
   return goalsStore
 }

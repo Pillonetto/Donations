@@ -1,16 +1,19 @@
 <template>
   <div class="flex gap-4 h-[80px] items-center px-4">
     <div class="w-2/5">
-      <img v-if="cartItemInfo.item.image" :src="cartItemInfo.item.image" alt="Item Image" />
-      <SkeletonImage v-else class="w-full h-full" />
+      <img v-if="cartItemInfo.image" :src="cartItemInfo.image" alt="Item Image" />
+      <SkeletonImage v-else class="w-full h-full rounded-lg" />
     </div>
     <div class="flex flex-col justify-between w-full grow-0 gap-2">
       <div class="flex flex-col">
-        <h1 class="font-bold">{{ cartItemInfo.item.name }}</h1>
+        <h1 class="font-bold">{{ cartItemInfo.name }}</h1>
         <p class="text-neutral-400">Cupom</p>
       </div>
       <div class="flex items-center justify-between">
-        <div class="flex gap-2 items-center">
+        <p v-if="timestamp" class="text-neutral-400">
+          {{ new Date(timestamp).toLocaleString() }}
+        </p>
+        <div class="flex gap-2 items-center" v-else>
           <button class="rounded-full bg-neutral-200 size-8 items-center justify-center flex">
             <IconMinus class="text-highlight" @click="removeQuantity" />
           </button>
@@ -19,7 +22,7 @@
             <IconPlus class="text-highlight" @click="addQuantity" />
           </button>
         </div>
-        <p class="font-bold text-lg">{{ cartItemInfo.item.price * cartItemInfo.quantity }} Pts</p>
+        <p class="font-bold text-lg">{{ cartItemInfo.price * cartItemInfo.quantity }} Pts</p>
       </div>
     </div>
   </div>
@@ -33,15 +36,16 @@ import { useCart } from '@/stores/CartStore'
 
 const props = defineProps<{
   cartItemInfo: CartItemInfo
+  timestamp?: number
 }>()
 
 const { addItem, removeItem } = useCart()
 
 function addQuantity() {
-  addItem(props.cartItemInfo.item)
+  addItem(props.cartItemInfo)
 }
 
 function removeQuantity() {
-  removeItem(props.cartItemInfo.item)
+  removeItem(props.cartItemInfo)
 }
 </script>
