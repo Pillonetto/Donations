@@ -5,11 +5,15 @@ import SkeletonImage from '../SkeletonImage.vue'
 import CarouselCircles from './CarouselCircles.vue'
 import { ref, watch } from 'vue'
 import { watchOnce } from '@vueuse/core'
+import ItemDrawer from './ItemDrawer.vue'
+import { type ItemInfo } from './ItemInfo'
 
 const { goals } = useGoals()
 
 const api = ref<CarouselApi>()
 const current = ref(0)
+const openItemDrawer = ref(false)
+const currentItem = ref<ItemInfo | null>(null)
 
 function setApi(val: CarouselApi) {
   api.value = val
@@ -28,7 +32,16 @@ function reloadCurrent() {
 }
 
 watchOnce(api, reloadCurrent)
-watch(() => goals.value.length, reloadCurrent)
+watch(
+  () => goals.value.length,
+  (newCount) => {
+    if (!newCount) {
+      currentItem.value = null
+      openItemDrawer.value = false
+    }
+    reloadCurrent()
+  },
+)
 </script>
 
 <template>
@@ -40,13 +53,25 @@ watch(() => goals.value.length, reloadCurrent)
         class="absolute bottom-2 w-full z-[2]"
       />
       <CarouselContent>
-        <CarouselItem v-for="goal in goals" :key="goal.name" class="relative">
+        <CarouselItem
+          v-for="goal in goals"
+          :key="goal.name"
+          class="relative"
+          @click="((currentItem = goal), (openItemDrawer = true))"
+        >
           <img v-if="goal.image" :src="goal.image" class="h-full w-full" />
           <SkeletonImage v-else class="h-full w-full" />
           <p class="font-bold text-2xl absolute bottom-10 left-6">{{ goal.name }}</p>
         </CarouselItem>
+        <ItemDrawer
+          v-if="openItemDrawer && currentItem"
+          :item="currentItem"
+          @close="((openItemDrawer = false), (currentItem = null))"
+          v-model:open="openItemDrawer"
+        />
       </CarouselContent>
     </Carousel>
+
     <div v-else>
       <p class="text-neutral-600 text-lg font-medium px-10 text-center">
         Você ainda não possui metas. Escolha uma das recompensas abaixo.
