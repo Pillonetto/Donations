@@ -32,7 +32,6 @@ function onConfirmationResult(result: boolean) {
         title: 'Sucesso!',
         description: 'Verifique seu e-mail para utilizar os itens resgatados.',
       })
-      emit('close')
     } else {
       toast({
         title: 'Erro',
@@ -40,6 +39,7 @@ function onConfirmationResult(result: boolean) {
         variant: 'destructive',
       })
     }
+    emit('close')
   }
 }
 </script>
@@ -47,7 +47,7 @@ function onConfirmationResult(result: boolean) {
 <template>
   <Drawer shouldScaleBackground @close="emit('close')">
     <DrawerContent>
-      <div class="flex flex-col gap-4 divide-y divide-neutral-400" v-if="cart.length">
+      <div class="flex flex-col gap-4 divide-y divide-neutral-400/25" v-if="cart.length">
         <CartItem v-for="cartItem in cart" :cartItemInfo="cartItem" :key="cartItem.item.name" />
       </div>
       <p v-else class="text-neutral-600 text-2xl font-medium text-center p-8">
