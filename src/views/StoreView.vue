@@ -44,10 +44,10 @@ import PageLayout from '@/components/PageLayout.vue'
 import GoalsCarousel from '@/components/store/GoalsCarousel.vue'
 import { type ItemInfo } from '@/components/store/ItemInfo'
 import StoreItem from '@/components/store/StoreItem.vue'
+import { provideCart } from '@/stores/CartStore'
 import { provideGoals } from '@/stores/GoalsStore'
 
-const goalsStore = provideGoals()
-goalsStore.loadGoals()
+runProvider()
 
 const MOCK_ITEMS: ItemInfo[] = [
   {
@@ -71,4 +71,10 @@ const MOCK_ITEMS: ItemInfo[] = [
     price: 400,
   },
 ]
+
+function runProvider() {
+  const goalsStore = provideGoals()
+  goalsStore.loadGoals()
+  provideCart()
+}
 </script>

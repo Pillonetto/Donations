@@ -7,6 +7,8 @@ import { ref, watch } from 'vue'
 import IconHeart from '../icons/IconHeart.vue'
 import IconHeartOutline from '../icons/IconHeartOutline.vue'
 import { useGoals } from '@/stores/GoalsStore'
+import { useCart } from '@/stores/CartStore'
+import { useToast } from '../ui/toast'
 
 const props = defineProps<{ item: ItemInfo }>()
 const emit = defineEmits<{
@@ -15,6 +17,9 @@ const emit = defineEmits<{
 
 const { addGoal, removeGoal, goals } = useGoals()
 const isItemGoal = ref(Boolean(goals.value.find((it) => it.name === props.item.name)))
+
+const { addItem } = useCart()
+const { toast } = useToast()
 
 watch(
   goals,
@@ -35,6 +40,14 @@ async function toggleItemGoal() {
   }
   isItemGoal.value = !isItemGoal.value
 }
+async function addItemToCart() {
+  await addItem(props.item)
+  emit('close')
+  toast({
+    title: 'Item Adicionado ao Carrinho',
+    description: props.item.name,
+  })
+}
 </script>
 
 <template>
@@ -52,7 +65,7 @@ async function toggleItemGoal() {
         </div>
       </div>
       <DrawerFooter>
-        <Button size="lg" class="text-lg font-medium">Resgatar</Button>
+        <Button size="lg" class="text-lg font-medium" @click="addItemToCart">Resgatar</Button>
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
