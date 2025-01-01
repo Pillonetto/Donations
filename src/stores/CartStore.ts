@@ -1,7 +1,7 @@
 import type { ItemInfo } from '@/components/store/ItemInfo'
 import { provide, inject, ref } from 'vue'
 
-type CartItemInfo = {
+export type CartItemInfo = {
   item: ItemInfo
   quantity: number
 }

@@ -7,7 +7,7 @@
           <p class="font-semibold">500 Pts</p>
           <IconInfo />
         </div>
-        <IconCart />
+        <CartShortcut />
       </div>
     </header>
     <div class="flex flex-col gap-8 overflow-y-scroll overflow-x-hidden py-6">
@@ -37,10 +37,10 @@
   </PageLayout>
 </template>
 <script setup lang="ts">
-import IconCart from '@/components/icons/IconCart.vue'
 import IconInfo from '@/components/icons/IconInfo.vue'
 import IconSearch from '@/components/icons/IconSearch.vue'
 import PageLayout from '@/components/PageLayout.vue'
+import CartShortcut from '@/components/store/CartShortcut.vue'
 import GoalsCarousel from '@/components/store/GoalsCarousel.vue'
 import { type ItemInfo } from '@/components/store/ItemInfo'
 import StoreItem from '@/components/store/StoreItem.vue'
