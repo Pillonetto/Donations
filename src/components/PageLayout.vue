@@ -8,6 +8,10 @@ const navBarHeight = ref(0)
 
 const { safeArea } = useSafeArea()
 
+defineProps({
+  noNav: Boolean,
+})
+
 onMounted(() => {
   navBarHeight.value = navBarContainer.value?.clientHeight ?? 0
 })
@@ -30,6 +34,7 @@ onMounted(() => {
     </div>
     <div class="absolute bottom-0 w-full bg-neutral-100" ref="navBarContainer">
       <NavigationBar
+        v-if="!noNav"
         :style="{
           paddingBottom: `${safeArea?.insets.bottom ?? 0}px`,
         }"
