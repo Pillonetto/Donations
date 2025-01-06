@@ -1,8 +1,7 @@
 <template>
-  <div class="flex flex-col gap-2 items-center" @click="openItemDrawer = true">
-    <img :src="item.image" v-if="item.image" />
-    <SkeletonImage v-else class="rounded-lg" />
-    <div class="flex flex-col items-center">
+  <div class="flex flex-col gap-2 items-start" @click="openItemDrawer = true">
+    <ItemImage :provider="item.provider" class="h-[120px] w-min" />
+    <div class="flex flex-col items-start pl-0.5">
       <p>{{ item.name }}</p>
       <p class="font-bold">{{ item.price + ' Pts' }}</p>
     </div>
@@ -15,8 +14,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import SkeletonImage from '../SkeletonImage.vue'
 import ItemDrawer from './ItemDrawer.vue'
+import ItemImage from './ItemImage.vue'
 import { type ItemInfo } from './ItemInfo'
 import { ref } from 'vue'
 

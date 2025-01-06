@@ -9,8 +9,8 @@ const db = new Dexie('GoalsDatabase') as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  goals: 'name, price, image, description',
-  history: 'id, price, image, description, quantity, timestamp',
+  goals: 'name, price, image, description, provider',
+  history: 'id, price, image, description, provider, quantity, timestamp',
 })
 
 export { db }

@@ -23,19 +23,20 @@
               class="w-full rounded-lg px-4 py-3 text-black border-neutral-500/25 border-[1px]"
             />
           </div>
-          <a class="text-highlight" href="/recover">Esqueci minha senha.</a>
+          <a class="text-highlight" href="/map">Esqueci minha senha.</a>
         </div>
 
         <div class="w-full flex items-center flex-col gap-4">
           <RouterLink
-            class="w-full rounded-2xl text-lg bg-highlight py-3 text-white font-semibold"
+            class="w-full rounded-2xl text-lg bg-highlight py-3 text-white font-semibold items-center flex justify-center"
             type="submit"
             to="/map"
           >
+            <p>Entrar</p>
           </RouterLink>
           <div class="flex flex-col gap-4">
             <p class="text-neutral-500">
-              Ainda não possui uma conta?<a class="text-highlight" href="/register">
+              Ainda não possui uma conta?<a class="text-highlight" href="/map">
                 Cadastre-se aqui.</a
               >
             </p>

@@ -17,7 +17,7 @@
         <LinkItem title="Notificações" />
         <LinkItem title="Contato" />
         <LinkItem title="Termos de Uso" />
-        <LinkItem title="Sair" to="/map" />
+        <LinkItem title="Sair" to="/" />
       </div>
     </div>
   </PageLayout>

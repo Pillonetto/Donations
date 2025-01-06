@@ -1,8 +1,7 @@
 <template>
   <div class="flex gap-4 h-[80px] items-center px-4">
     <div class="w-2/5">
-      <img v-if="cartItemInfo.image" :src="cartItemInfo.image" alt="Item Image" />
-      <SkeletonImage v-else class="w-full h-full rounded-lg" />
+      <ItemImage :provider="cartItemInfo.provider" class="w-full h-full rounded-lg" />
     </div>
     <div class="flex flex-col justify-between w-full grow-0 gap-2">
       <div class="flex flex-col">
@@ -29,10 +28,10 @@
 </template>
 <script setup lang="ts">
 import type { CartItemInfo } from '@/stores/CartStore'
-import SkeletonImage from '../SkeletonImage.vue'
 import IconPlus from '../icons/IconPlus.vue'
 import IconMinus from '../icons/IconMinus.vue'
 import { useCart } from '@/stores/CartStore'
+import ItemImage from './ItemImage.vue'
 
 const props = defineProps<{
   cartItemInfo: CartItemInfo

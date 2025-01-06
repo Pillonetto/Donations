@@ -37,7 +37,7 @@
           <a class="text-highlight font-semibold">Ver mais</a>
         </div>
         <div class="overflow-x-scroll w-full flex gap-4 no-scrollbar px-4">
-          <StoreItem v-for="item in MOCK_ITEMS" :key="item.name" :item="item" />
+          <StoreItem v-for="item in availableItems" :key="item.name" :item="item" />
         </div>
       </div>
       <div class="flex flex-col gap-4">
@@ -58,11 +58,12 @@ import IconSearch from '@/components/icons/IconSearch.vue'
 import PageLayout from '@/components/PageLayout.vue'
 import CartShortcut from '@/components/store/CartShortcut.vue'
 import GoalsCarousel from '@/components/store/GoalsCarousel.vue'
-import { type ItemInfo } from '@/components/store/ItemInfo'
+import { ItemProvider, type ItemInfo } from '@/components/store/ItemInfo'
 import StoreItem from '@/components/store/StoreItem.vue'
 import { provideCart } from '@/stores/CartStore'
 import { provideGoals } from '@/stores/GoalsStore'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { computed } from 'vue'
 
 provideGoals()
 const { currentPoints } = provideCart()
@@ -71,22 +72,53 @@ const MOCK_ITEMS: ItemInfo[] = [
   {
     name: 'Vale Compras - Renner R$10',
     price: 400,
+    provider: ItemProvider.RENNER,
+  },
+  {
+    name: 'Vale Compras - Zaffari R$10',
+    price: 400,
+    provider: ItemProvider.ZAFFARI,
   },
   {
     name: 'Vale Compras - Renner R$50',
     price: 2000,
+    provider: ItemProvider.RENNER,
   },
   {
-    name: 'Vale Compras - Zaffari R$10',
-    price: 400,
+    name: 'Vale Compras - Zaffari R$20',
+    price: 800,
+    provider: ItemProvider.ZAFFARI,
   },
   {
-    name: 'Vale Compras - Zaffari R$10',
-    price: 400,
+    name: 'Vale Compras - GremioMania R$10',
+    price: 200,
+    provider: ItemProvider.GREMIO,
   },
   {
-    name: 'Vale Compras - Zaffari R$10',
-    price: 400,
+    name: 'Vale Compras - Internacional R$50',
+    price: 1000,
+    provider: ItemProvider.INTER,
+  },
+  {
+    name: 'Vale Compras - Zaffari R$50',
+    price: 2000,
+    provider: ItemProvider.ZAFFARI,
+  },
+
+  {
+    name: 'Vale Compras - GremioMania R$50',
+    price: 1000,
+    provider: ItemProvider.GREMIO,
+  },
+
+  {
+    name: 'Vale Compras - Internacional R$50',
+    price: 1000,
+    provider: ItemProvider.INTER,
   },
 ]
+
+const availableItems = computed(() => {
+  return MOCK_ITEMS.filter((item) => item.price <= currentPoints.value)
+})
 </script>

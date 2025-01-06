@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import { useGoals } from '@/stores/GoalsStore'
-import SkeletonImage from '../SkeletonImage.vue'
 import CarouselCircles from './CarouselCircles.vue'
 import { ref, watch } from 'vue'
 import { watchOnce } from '@vueuse/core'
 import ItemDrawer from './ItemDrawer.vue'
 import { type ItemInfo } from './ItemInfo'
+import ItemImage from './ItemImage.vue'
 
 const { goals } = useGoals()
 
@@ -50,7 +50,7 @@ watch(
       <CarouselCircles
         :count="goals.length"
         :selected="current"
-        class="absolute bottom-2 w-full z-[2]"
+        class="absolute bottom-0 w-full z-[2]"
       />
       <CarouselContent>
         <CarouselItem
@@ -59,9 +59,8 @@ watch(
           class="relative"
           @click="((currentItem = goal), (openItemDrawer = true))"
         >
-          <img v-if="goal.image" :src="goal.image" class="h-full w-full" />
-          <SkeletonImage v-else class="h-full w-full" />
-          <p class="font-bold text-2xl absolute bottom-10 left-6">{{ goal.name }}</p>
+          <ItemImage :provider="goal.provider" class="h-full w-full" />
+          <p class="font-bold text-2xl absolute bottom-8 left-6">{{ goal.name }}</p>
         </CarouselItem>
         <ItemDrawer
           v-if="openItemDrawer && currentItem"
